@@ -6,6 +6,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>I found App.tsx and my name is Mr IIE</Text>
       <Text>Hello world, I can code on all phones now</Text>
+      <Text>Testing 1 2</Text>
 
     </View>
   );
