@@ -1,22 +1,34 @@
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>I found App.tsx and my name is Mr IIE</Text>
-      <Text>Hello world, I can code on all phones now</Text>
-      <Text>Testing 1 2 3</Text>
+    <View >
+       
+       <View>
+        <Image source={require('./img/welcome_to_react.png')} /> 
+      </View>
+
+
+       <Text style={styles.welcomeText}>Welcome your React App!</Text>
+        <Text>Enter Name:</Text>
+        <TextInput placeholder="First Name"/>
+        <Text>Enter Surname:</Text>
+        <TextInput placeholder="Surname"/>
+
+<Button title="Add User" />
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  welcomeText: {
+paddingTop: 40,
+color: 'purple',
+fontWeight: 'bold',
+fontSize: 28,
+textAlign: 'center',
+}
+
 });
