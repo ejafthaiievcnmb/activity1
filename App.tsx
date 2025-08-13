@@ -1,13 +1,32 @@
 import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
 import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  return(
+          <NavigationContainer>
+              <Stack.Navigator>
+              <Stack.Screen name="Home" component={MainScreen} />
+               <Stack.Screen name="ViewDetails" component={ViewDetails} />
+              </Stack.Navigator>
+          </NavigationContainer>
+  );
+};
+
+
+
+
+function MainScreen({ navigation }) {
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
 
   console.log("App starting up now.")
 
   return (
+   
     <View >
        
        <View style={styles.mainPicture}>
@@ -26,20 +45,33 @@ export default function App() {
                     />
        </View>
 
-     <Text style={styles.HeadingText}>Enter Surname:</Text>
+        <View style={styles.InputFlex}>
+        <Text style={styles.HeadingText}>Enter Surname:</Text>
         <TextInput style={styles.InputBoxs}
                     placeholder="Surname"
                     onChangeText={newText => setSurname(newText)}   />
+        </View>
        
 
 <Button title="Add User"
         onPress={() => {
-          console.log("The user's name is: " + Name + " Surname:" + Surname)} 
+          navigation.navigate('ViewDetails');
+          console.log("The user's name is: " + Name + " Surname: " + Surname)} 
           } />
 
     </View>
+
   );
 }
+
+function ViewDetails(){
+  return(
+    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+      <Text> Name: ### Surname: #### </Text>
+    </View>
+  );
+};
+
 
 const styles = StyleSheet.create({
   welcomeText: {
@@ -62,10 +94,22 @@ textAlign: 'center',
   },
 
   InputFlex:{
+    fontSize:34,
     flexDirection:'row',
     marginTop:30,
-    justifyContent:'space-evenly'
-  }
+    justifyContent:'space-evenly',
+    
+  },
 
+  InputBoxs:{
+    fontSize:32,
+    backgroundColor:'yellow',
+    paddingHorizontal:20,
+    width:150,
+  },
+
+  HeadingText:{
+    fontSize:32
+  }
 
 });
