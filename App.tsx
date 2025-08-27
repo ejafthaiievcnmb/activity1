@@ -1,5 +1,6 @@
-import { StyleSheet, TextInput, Text, View, Button, Image } from 'react-native';
-import { useState } from 'react';
+import { StyleSheet, TextInput, Text, View, Button, Image, SafeAreaView, ScrollView } from 'react-native';
+import { Animated } from 'react-native';
+import { useState, useRef, useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,7 +17,29 @@ export default function App() {
   );
 };
 
+// Animation Component
+const FadeInView = (props:any) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current
 
+  useEffect (() => {
+    Animated.timing(
+      fadeAnim, {
+        toValue:1,
+        duration:3000,
+        useNativeDriver:false
+      }
+    ).start();
+  }, [fadeAnim]);
+
+  return ( 
+    <Animated.View style = {{
+      ...props.style,
+      opacity: fadeAnim,
+    }} >
+        {props.children}
+    </Animated.View>
+  );
+};
 
 
 function MainScreen({ navigation}:any) {
@@ -28,7 +51,8 @@ function MainScreen({ navigation}:any) {
   return (
    
     <View >
-       
+       <SafeAreaView>
+        <ScrollView>
        <View style={styles.mainPicture}>
         <Image style={styles.ImageSize}
           source={require('./img/welcome_to_react.png')} /> 
@@ -36,7 +60,7 @@ function MainScreen({ navigation}:any) {
 
 
        <Text style={styles.welcomeText}>Welcome your React App!</Text>
-        
+        <FadeInView>
         <View style={styles.InputFlex}>
         <Text style={styles.HeadingText}>Enter Name:</Text>
         <TextInput  style={styles.InputBoxs} 
@@ -61,7 +85,9 @@ function MainScreen({ navigation}:any) {
           
             console.log("The user's name is: " + Name + " Surname: " + Surname)} 
           } />
-
+          </FadeInView>
+            </ScrollView>
+            </SafeAreaView>
     </View>
 
   );
