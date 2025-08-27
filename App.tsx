@@ -19,7 +19,7 @@ export default function App() {
 
 
 
-function MainScreen({ navigation }) {
+function MainScreen({ navigation}:any) {
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
 
@@ -55,8 +55,11 @@ function MainScreen({ navigation }) {
 
 <Button title="Add User"
         onPress={() => {
-          navigation.navigate('ViewDetails');
-          console.log("The user's name is: " + Name + " Surname: " + Surname)} 
+          navigation.navigate('ViewDetails',
+            { NameSend : Name,
+              SurnameSend: Surname});
+          
+            console.log("The user's name is: " + Name + " Surname: " + Surname)} 
           } />
 
     </View>
@@ -64,10 +67,25 @@ function MainScreen({ navigation }) {
   );
 }
 
-function ViewDetails(){
+function ViewDetails({navigation, route}:any) {
+  const NameGet = route.params.NameSend ;
+  const SurnameGet = route.params.SurnameSend
+  // When outside return section you can use single-line comments
+
+  /* you can also use multi-line comments
+  This is an example.
+  Use it frequently as it will help you to know and understand
+  the different sections of your code.  
+   */
+
+
   return(
-    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-      <Text> Name: ### Surname: #### </Text>
+    /* This is comments inside the return section */
+    <View style={{  flex:1,alignItems:'center',
+                    justifyContent:'center',
+                    backgroundColor:'purple'}}>
+      <Text style={{fontSize:34,color:'white'}}>
+            Name: {NameGet} Surname: {SurnameGet} </Text>
     </View>
   );
 };
