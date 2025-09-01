@@ -45,6 +45,7 @@ const FadeInView = (props:any) => {
 function MainScreen({ navigation}:any) {
   const [Name, setName] = useState('');
   const [Surname, setSurname] = useState('');
+  const [Error, setError] = useState('');
 
   console.log("App starting up now.")
 
@@ -154,6 +155,13 @@ textAlign: 'center',
 
   HeadingText:{
     fontSize:32
+  },
+
+  red:{
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 26,
+    textAlign: 'center'
   }
 
 });
